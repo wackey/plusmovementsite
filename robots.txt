@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://plus-movement.jp/sitemap.xml
