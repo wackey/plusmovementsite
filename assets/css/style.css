@@ -323,7 +323,6 @@ h6 {
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: var(--spacing-md);
     margin-bottom: var(--spacing-sm);
 }
