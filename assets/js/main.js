@@ -34,4 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log('Plus Movement Site Loaded');
+
+    // Scroll Animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Trigger once
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.fade-in, .fade-in-up');
+    animatedElements.forEach(el => observer.observe(el));
 });
