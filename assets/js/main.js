@@ -12,5 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Hamburger Menu Logic
+    const header = document.querySelector('.header');
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.header-nav');
+    const navLinks = document.querySelectorAll('.header-nav a');
+
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+            header.classList.toggle('nav-open');
+            nav.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                header.classList.remove('nav-open');
+                nav.classList.remove('active');
+            });
+        });
+    }
+
     console.log('Plus Movement Site Loaded');
 });
