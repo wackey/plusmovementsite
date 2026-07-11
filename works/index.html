@@ -118,6 +118,124 @@ a:hover{color:#e8380d}
   font-size: 12px;
   color: rgba(34,31,28,.5);
 }
+
+#menu-btn, .menu-icon { display: none; }
+.nav-menu {
+  position: fixed;
+  top: 20px;
+  right: 48px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+@media (max-width: 768px) {
+  header { padding: 16px 24px !important; }
+  
+  /* ハンバーガーアイコン */
+  .menu-icon { display: block !important; }
+  .menu-icon .navicon {
+    background: #fff;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 24px;
+    margin-top: 9px;
+  }
+  .menu-icon .navicon:before, .menu-icon .navicon:after {
+    background: #fff;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+  .menu-icon .navicon:before { top: 6px; }
+  .menu-icon .navicon:after { top: -6px; }
+
+  /* ドロワーメニュー */
+  .nav-menu {
+    display: none !important;
+    position: fixed;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    background: rgba(7, 10, 24, 0.96);
+    backdrop-filter: blur(12px);
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+  .nav-menu a {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    color: #efeadf !important;
+    text-shadow: none !important;
+  }
+  .nav-menu a[style*="border"] {
+    border-color: rgba(239, 234, 223, 0.5) !important;
+    padding: 16px 48px !important;
+    font-size: 16px !important;
+  }
+
+  /* メニュー展開時 */
+  #menu-btn:checked ~ .nav-menu {
+    display: flex !important;
+    opacity: 1;
+  }
+  #menu-btn:checked ~ .menu-icon .navicon { background: transparent; }
+  #menu-btn:checked ~ .menu-icon .navicon:before { transform: rotate(-45deg); top: 0; }
+  #menu-btn:checked ~ .menu-icon .navicon:after { transform: rotate(45deg); top: 0; }
+  
+  section { padding: 80px 24px !important; }
+  section[data-screen-label="実績ヒーロー"] { padding: 120px 24px 60px !important; }
+  section[data-screen-label="実績ヒーロー"] > div[style*="width:1px"] { display: none !important; }
+  
+  div[style*="display:grid;grid-template-columns:1fr 1fr"],
+  div[style*="display:grid;grid-template-columns:1.1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  
+  .case-study-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .case-study-card-grid > div:first-child {
+    min-height: 240px !important;
+  }
+  .case-study-card-grid > div:last-child {
+    padding: 32px 20px !important;
+  }
+  
+  div[style*="min-height:400px"] {
+    min-height: 240px !important;
+  }
+  div[style*="padding:60px 56px"] {
+    padding: 32px 20px !important;
+  }
+  
+  .work-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .book-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .book-card {
+    padding: 20px !important;
+    gap: 16px !important;
+  }
+
+  footer { padding: 40px 24px 32px !important; }
+  footer > div { flex-direction: column !important; align-items: center !important; gap: 20px !important; }
+  footer nav { flex-wrap: wrap !important; justify-content: center !important; gap: 12px 18px !important; }
+}
 </style>
 </helmet>
 
@@ -135,17 +253,23 @@ a:hover{color:#e8380d}
 
   <div style="position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E&quot;)"></div>
 
+  <input type="checkbox" id="menu-btn" style="display:none">
   <!-- ===== fixed header ===== -->
   <header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:linear-gradient(180deg,rgba(232,56,13,.55),rgba(232,56,13,0));backdrop-filter:blur(8px)">
     <span style="display:block;overflow:hidden;padding:2px 0"><a href="../"><img src="../assets/logo-white.svg" alt="+Movement" style="height:20px;display:block;animation:logoIn 1.3s cubic-bezier(.22,1,.36,1) 1.5s both;border:none"></a></span>
-    <nav style="display:flex;align-items:center;gap:38px;font-size:13.5px;font-weight:400;letter-spacing:.08em">
-      <a href="../index.html#services" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">サービス</a>
-      <a href="../index.html#reasons" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">選ばれる理由</a>
-      <a href="../works/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4);font-weight:700">実績</a>
-      <a href="../about/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">会社案内</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSehuhIdjtNH-dgADjC6aBkbbd0Q0tedgNwh2FQGrUJuMMsceA/viewform" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 32px;border:1px solid rgba(255,255,255,.7);color:#fff;font-weight:500;letter-spacing:.12em;font-size:13px" style-hover="background:#fff;border-color:#fff;color:#e8380d">お問い合わせ</a>
-    </nav>
+    
+    <label for="menu-btn" class="menu-icon" style="display:none;position:relative;z-index:100;cursor:pointer;width:30px;height:20px">
+      <span class="navicon"></span>
+    </label>
   </header>
+
+  <nav class="nav-menu" style="display:flex;align-items:center;gap:38px;font-size:13.5px;font-weight:400;letter-spacing:.08em">
+    <a href="../index.html#services" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">サービス</a>
+    <a href="../index.html#reasons" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">選ばれる理由</a>
+    <a href="../works/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4);font-weight:700">実績</a>
+    <a href="../about/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">会社案内</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSehuhIdjtNH-dgADjC6aBkbbd0Q0tedgNwh2FQGrUJuMMsceA/viewform" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 32px;border:1px solid rgba(255,255,255,.7);color:#fff;font-weight:500;letter-spacing:.12em;font-size:13px" style-hover="background:#fff;border-color:#fff;color:#e8380d">お問い合わせ</a>
+  </nav>
 
   <!-- ===== page hero ===== -->
   <section data-screen-label="実績ヒーロー" style="position:relative;padding:200px 48px 100px;overflow:hidden;background:linear-gradient(165deg,#ef4315,#e8380d 45%,#c22405);color:#fff;animation:heroFade 2.5s linear both">
@@ -170,7 +294,7 @@ a:hover{color:#e8380d}
   <section data-screen-label="事例" style="padding:130px 48px;max-width:1150px;margin:0 auto">
     <div data-reveal="translateY(44px)" style="position:relative">
       <div style="position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;border:1px solid rgba(176,128,63,.4);pointer-events:none"></div>
-      <div style="position:relative;background:#fffdf8;border:1px solid rgba(34,31,28,.15);display:grid;grid-template-columns:1.1fr 1fr">
+      <div class="case-study-card-grid" style="position:relative;background:#fffdf8;border:1px solid rgba(34,31,28,.15);display:grid;grid-template-columns:1.1fr 1fr">
         <div style="position:relative;min-height:400px;background:#efe8da;display:flex;align-items:center;justify-content:center">
           <img src="../assets/images/breakfast_buffet.png" alt="ホテルの朝食ビュッフェ" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
         </div>
@@ -357,6 +481,16 @@ class Component extends DCLogic {
       });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ハンバーガーメニューのリンククリック時にドロワーを閉じる
+    const menuBtn = document.getElementById('menu-btn');
+    if (menuBtn) {
+      document.querySelectorAll('.nav-menu a').forEach((a) => {
+        a.addEventListener('click', () => {
+          menuBtn.checked = false;
+        });
+      });
+    }
 
     const shutterTimer = setTimeout(() => {
       const sh = document.getElementById('shutter');

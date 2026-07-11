@@ -39,6 +39,133 @@ a:hover{color:#e8380d}
 @keyframes logoIn{0%{transform:translateY(140%)}100%{transform:translateY(0)}}
 @keyframes shutterSweep{0%{transform:translateY(-105%)}34%{transform:translateY(0)}56%{transform:translateY(0)}100%{transform:translateY(105%)}}
 @keyframes heroFade{0%,38%{opacity:0}58%{opacity:1}100%{opacity:1}}
+
+#menu-btn, .menu-icon { display: none; }
+.nav-menu {
+  position: fixed;
+  top: 20px;
+  right: 48px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+@media (max-width: 768px) {
+  header { padding: 16px 24px !important; }
+  
+  /* ハンバーガーアイコン */
+  .menu-icon { display: block !important; }
+  .menu-icon .navicon {
+    background: #fff;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 24px;
+    margin-top: 9px;
+  }
+  .menu-icon .navicon:before, .menu-icon .navicon:after {
+    background: #fff;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+  .menu-icon .navicon:before { top: 6px; }
+  .menu-icon .navicon:after { top: -6px; }
+
+  /* ドロワーメニュー */
+  .nav-menu {
+    display: none !important;
+    position: fixed;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    background: rgba(7, 10, 24, 0.96);
+    backdrop-filter: blur(12px);
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+  .nav-menu a {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    color: #efeadf !important;
+    text-shadow: none !important;
+  }
+  .nav-menu a[style*="border"] {
+    border-color: rgba(239, 234, 223, 0.5) !important;
+    padding: 16px 48px !important;
+    font-size: 16px !important;
+  }
+
+  /* メニュー展開時 */
+  #menu-btn:checked ~ .nav-menu {
+    display: flex !important;
+    opacity: 1;
+  }
+  #menu-btn:checked ~ .menu-icon .navicon { background: transparent; }
+  #menu-btn:checked ~ .menu-icon .navicon:before { transform: rotate(-45deg); top: 0; }
+  #menu-btn:checked ~ .menu-icon .navicon:after { transform: rotate(45deg); top: 0; }
+  
+  section { padding: 80px 24px !important; }
+  section[id="hero"] { padding: 120px 24px 80px !important; min-height: auto !important; }
+  section[id="hero"] > div[style*="width:1px"] { display: none !important; }
+  section[id="hero"] h1 { margin-top: 24px !important; }
+  section[id="hero"] div[style*="display:flex;justify-content:space-between"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    margin-top: 36px !important;
+  }
+  #v-label { display: none !important; }
+
+  div[style*="display:grid;grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+  div[style*="border-right:1px solid"] {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(34,31,28,.14) !important;
+    padding: 0 0 36px !important;
+  }
+  div[style*="border-right:1px solid"]:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .service-item-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+    padding: 32px 8px !important;
+  }
+  
+  .case-study-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .case-study-grid > div:first-child {
+    min-height: 240px !important;
+  }
+
+  div[style*="display:grid;grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  div[style*="min-height:380px"] {
+    min-height: 240px !important;
+  }
+
+  footer { padding: 40px 24px 32px !important; }
+  footer > div { flex-direction: column !important; align-items: center !important; gap: 20px !important; }
+  footer nav { flex-wrap: wrap !important; justify-content: center !important; gap: 12px 18px !important; }
+}
 </style>
 </helmet>
 
@@ -57,17 +184,23 @@ a:hover{color:#e8380d}
   <!-- grain -->
   <div style="position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.55;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E&quot;)"></div>
 
+  <input type="checkbox" id="menu-btn" style="display:none">
   <!-- ===== fixed header ===== -->
   <header data-comment-anchor="header-c" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:linear-gradient(180deg,rgba(232,56,13,.55),rgba(232,56,13,0));backdrop-filter:blur(8px)">
     <span style="display:block;overflow:hidden;padding:2px 0"><a href="./"><img src="assets/logo-white.svg" alt="+Movement" style="height:20px;display:block;animation:logoIn 1.3s cubic-bezier(.22,1,.36,1) 1.5s both;border:none"></a></span>
-    <nav style="display:flex;align-items:center;gap:38px;font-size:13.5px;font-weight:400;letter-spacing:.08em">
-      <a href="#services" data-anchor="services" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">サービス</a>
-      <a href="#reasons" data-anchor="reasons" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">選ばれる理由</a>
-      <a href="works/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">実績</a>
-      <a href="about/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">会社案内</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSehuhIdjtNH-dgADjC6aBkbbd0Q0tedgNwh2FQGrUJuMMsceA/viewform" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 32px;border:1px solid rgba(255,255,255,.7);color:#fff;font-weight:500;letter-spacing:.12em;font-size:13px" style-hover="background:#fff;border-color:#fff;color:#e8380d">お問い合わせ</a>
-    </nav>
+    
+    <label for="menu-btn" class="menu-icon" style="display:none;position:relative;z-index:100;cursor:pointer;width:30px;height:20px">
+      <span class="navicon"></span>
+    </label>
   </header>
+
+  <nav class="nav-menu" style="display:flex;align-items:center;gap:38px;font-size:13.5px;font-weight:400;letter-spacing:.08em">
+    <a href="#services" data-anchor="services" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">サービス</a>
+    <a href="#reasons" data-anchor="reasons" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">選ばれる理由</a>
+    <a href="works/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">実績</a>
+    <a href="about/" style="color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)">会社案内</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSehuhIdjtNH-dgADjC6aBkbbd0Q0tedgNwh2FQGrUJuMMsceA/viewform" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:12px 32px;border:1px solid rgba(255,255,255,.7);color:#fff;font-weight:500;letter-spacing:.12em;font-size:13px" style-hover="background:#fff;border-color:#fff;color:#e8380d">お問い合わせ</a>
+  </nav>
 
   <!-- ===== hero (dark) ===== -->
   <section id="hero" data-screen-label="ヒーロー" style="position:relative;min-height:104vh;overflow:hidden;background:linear-gradient(165deg,#ef4315,#e8380d 45%,#c22405);color:#fff;display:flex;align-items:center;animation:heroFade 2.5s linear both">
@@ -123,17 +256,17 @@ a:hover{color:#e8380d}
     <p data-reveal="translateY(26px)" style="margin:26px 0 0;max-width:540px;color:rgba(34,31,28,.65);line-height:2.2;font-weight:300;font-size:15px">「サイトを作って終わり」にしません。Webと現場業務の両方を、AIの力で軽くしていきます。</p>
 
     <div style="margin-top:70px;border-top:1px solid rgba(34,31,28,.2)">
-      <div data-reveal="translateY(34px)" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
+      <div class="service-item-grid" data-reveal="translateY(34px)" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
         <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:#b0803f;letter-spacing:.14em">No. 01</div>
         <h3 style="font-family:'Shippori Mincho B1',serif;font-size:25px;font-weight:700;margin:0;letter-spacing:.08em;color:#1d1a17">Web制作・<br>リニューアル</h3>
         <p style="margin:0;color:rgba(34,31,28,.65);line-height:2.2;font-size:14px;font-weight:300">集客につながるサイトを、設計から制作・公開後の運用まで一貫して。WordPress構築を強みに、更新しやすいサイトを作ります。</p>
       </div>
-      <div data-reveal="translateY(34px)" data-reveal-delay="100" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
+      <div class="service-item-grid" data-reveal="translateY(34px)" data-reveal-delay="100" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
         <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:#b0803f;letter-spacing:.14em">No. 02</div>
         <h3 style="font-family:'Shippori Mincho B1',serif;font-size:25px;font-weight:700;margin:0;letter-spacing:.08em;color:#1d1a17">AI導入・<br>業務改善</h3>
         <p style="margin:0;color:rgba(34,31,28,.65);line-height:2.2;font-size:14px;font-weight:300">生成AIで、日々の繰り返し作業を軽く。小さな導入から始めて、段階的に成果を積み上げます。需要予測などの現場AIも構築します。</p>
       </div>
-      <div data-reveal="translateY(34px)" data-reveal-delay="200" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
+      <div class="service-item-grid" data-reveal="translateY(34px)" data-reveal-delay="200" style="display:grid;grid-template-columns:130px 1fr 1.2fr;gap:36px;align-items:baseline;padding:48px 8px;border-bottom:1px solid rgba(34,31,28,.14)" style-hover="background:rgba(232,56,13,.03)">
         <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:#b0803f;letter-spacing:.14em">No. 03</div>
         <h3 style="font-family:'Shippori Mincho B1',serif;font-size:25px;font-weight:700;margin:0;letter-spacing:.08em;color:#1d1a17">AI研修・<br>伴走サポート</h3>
         <p style="margin:0;color:rgba(34,31,28,.65);line-height:2.2;font-size:14px;font-weight:300">導入して終わりではなく、現場のみなさんが自走できるまで。研修とフォローアップで“変化対応力”を育てます。</p>
@@ -179,7 +312,7 @@ a:hover{color:#e8380d}
         <h2 style="font-family:'Shippori Mincho B1',serif;font-size:clamp(28px,3.6vw,46px);font-weight:800;margin:0;letter-spacing:.06em">サイトの更新から、<br>朝食の仕込みまで。</h2>
         <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;letter-spacing:.12em;color:#d8b98a">Case study</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:70px">
+      <div class="case-study-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:70px">
         <div data-reveal="translateX(-36px)" style="position:relative">
           <div style="position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;border:1px solid rgba(216,185,138,.35);pointer-events:none"></div>
           <div style="position:relative;min-height:380px;overflow:hidden;border:1px solid rgba(216,185,138,.2);background:#efe8da;display:flex;align-items:center;justify-content:center">
@@ -318,6 +451,16 @@ class Component extends DCLogic {
           });
         }
       }, 800);
+    }
+
+    // ハンバーガーメニューのリンククリック時にドロワーを閉じる
+    const menuBtn = document.getElementById('menu-btn');
+    if (menuBtn) {
+      document.querySelectorAll('.nav-menu a').forEach((a) => {
+        a.addEventListener('click', () => {
+          menuBtn.checked = false;
+        });
+      });
     }
 
     const shutterTimer = setTimeout(() => {
