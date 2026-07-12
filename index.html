@@ -177,6 +177,87 @@ a:hover{color:#e8380d}
   footer > div { flex-direction: column !important; align-items: center !important; gap: 20px !important; }
   footer nav { flex-wrap: wrap !important; justify-content: center !important; gap: 12px 18px !important; }
 }
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 8px 0;
+}
+.stats-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(34,31,28,.14);
+}
+.stats-label {
+  font-size: 12px;
+  color: rgba(34,31,28,.5);
+  letter-spacing: .12em;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.stats-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 54px;
+  font-weight: 800;
+  color: #e8380d;
+  line-height: 1;
+}
+.stats-text {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #1d1a17;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+}
+.stats-unit {
+  font-size: 12px;
+  color: rgba(34,31,28,.6);
+  margin-left: 4px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+  }
+  .stats-item:nth-child(2n)::after {
+    display: none;
+  }
+  .stats-item:nth-child(2n-1)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: rgba(34,31,28,.14);
+  }
+  .stats-item:nth-child(1)::before, .stats-item:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 15%;
+    width: 70%;
+    height: 1px;
+    background: rgba(34,31,28,.1);
+  }
+}
 </style>
 </helmet>
 
@@ -258,6 +339,39 @@ a:hover{color:#e8380d}
     </div>
   </div>
 
+  <!-- ===== stats bar ===== -->
+  <div style="background:#f5f0e6;border-bottom:1px solid rgba(34,31,28,.12);padding:46px 24px;margin-top:-1px">
+    <div class="stats-container">
+      <div class="stats-item">
+        <span class="stats-label">Web制作歴</span>
+        <div style="display:flex;align-items:baseline;justify-content:center">
+          <span class="stats-number">24</span>
+          <span class="stats-unit">年</span>
+        </div>
+      </div>
+      <div class="stats-item">
+        <span class="stats-label">公的機関支援</span>
+        <div style="display:flex;align-items:baseline;justify-content:center">
+          <span class="stats-number">14</span>
+          <span class="stats-unit">年連続</span>
+        </div>
+      </div>
+      <div class="stats-item">
+        <span class="stats-label">創業</span>
+        <div style="display:flex;align-items:baseline;justify-content:center">
+          <span class="stats-number">2012</span>
+          <span class="stats-unit">年</span>
+        </div>
+      </div>
+      <div class="stats-item">
+        <span class="stats-label">著書</span>
+        <div style="display:flex;align-items:baseline;justify-content:center">
+          <span class="stats-text">商業出版</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== services ===== -->
   <section id="services" data-screen-label="サービス" style="padding:140px 48px 110px;max-width:1100px;margin:0 auto">
     <div data-reveal="translateY(32px)" style="display:flex;align-items:baseline;gap:26px;flex-wrap:wrap">
@@ -309,7 +423,7 @@ a:hover{color:#e8380d}
           <div style="font-family:'Shippori Mincho B1',serif;font-size:76px;font-weight:700;line-height:1;color:#b0803f">三</div>
           <div style="width:40px;height:1px;background:#e8380d;margin-top:26px"></div>
           <div style="font-family:'Shippori Mincho B1',serif;font-weight:700;font-size:18px;margin-top:24px;letter-spacing:.06em;color:#1d1a17">現場が自走できるまで伴走</div>
-          <p style="margin:14px 0 0;color:rgba(34,31,28,.6);font-size:13.5px;line-height:2.1;font-weight:300">納品して終わりではなく、研修・フォローアップまで。2012年の創業以来、長いお付き合いを大切にしてきました。</p>
+          <p style="margin:14px 0 0;color:rgba(34,31,28,.6);font-size:13.5px;line-height:2.1;font-weight:300">納品して終わりではなく、研修・フォローアップまで。2012年の創業以来、公的機関にも14年、選ばれ続けています。</p>
         </div>
       </div>
     </div>
@@ -356,9 +470,18 @@ a:hover{color:#e8380d}
       <span data-reveal="translateY(24px)" style="display:block;margin-top:44px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;letter-spacing:.12em;color:#b0803f">Message</span>
       <h2 data-reveal="translateY(30px)" data-reveal-delay="100" style="font-family:'Shippori Mincho B1',serif;font-size:clamp(26px,3vw,40px);font-weight:800;margin:24px 0 0;line-height:1.8;letter-spacing:.08em;color:#1d1a17">変化を、恐れから楽しみに変えたい。</h2>
       <p data-reveal="translateY(30px)" data-reveal-delay="200" style="margin:30px auto 0;max-width:600px;color:rgba(34,31,28,.68);line-height:2.4;font-size:14.5px;font-weight:300">AIという言葉に、身構える必要はありません。私たちは2012年からWebの現場に立ち続け、いま、AIがもたらす追い風を確信しています。あなたの商売の「ちょっと困った」を聞かせてください。小さな一歩から、プラスの変化を一緒に始めましょう。</p>
-      <div data-reveal="translateY(24px)" data-reveal-delay="300" style="margin-top:38px;display:flex;justify-content:center;align-items:baseline;gap:18px">
-        <span style="font-size:12.5px;color:rgba(34,31,28,.5);letter-spacing:.06em">プラス・ムーブメント合同会社 代表社員</span>
-        <span style="font-family:'Shippori Mincho B1',serif;font-size:23px;font-weight:700;letter-spacing:.2em;color:#1d1a17">脇村 隆</span>
+      <div data-reveal="translateY(24px)" data-reveal-delay="300" style="margin-top:38px;display:flex;flex-direction:column;align-items:center">
+        <div style="display:flex;justify-content:center;align-items:baseline;gap:18px">
+          <span style="font-size:12.5px;color:rgba(34,31,28,.5);letter-spacing:.06em">プラス・ムーブメント合同会社 代表社員</span>
+          <span style="font-family:'Shippori Mincho B1',serif;font-size:23px;font-weight:700;letter-spacing:.2em;color:#1d1a17">脇村 隆</span>
+        </div>
+        <div style="width:1px;height:24px;background:#b0803f;opacity:0.4;margin:18px 0 14px"></div>
+        <div style="font-size:13.5px;line-height:2.3;color:rgba(34,31,28,.65);font-weight:300;text-align:center;letter-spacing:0.04em">
+          Web制作歴 24年<br>
+          商工会・自治体など公的機関のWeb業務を14年連続継続支援<br>
+          『アフィリエイターのための Web APIプログラミング入門』著者(商業出版)<br>
+          WordPress向けAIチャットボット「AI語り部」を自社開発
+        </div>
       </div>
     </div>
   </section>
